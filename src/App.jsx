@@ -108,16 +108,19 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const currentNav = NAV.find(n => n.id === view);
+  const isHome = view === 'home';
 
   return (
     <div className="min-h-screen bg-slate-950 text-white font-sans flex">
       {/* Desktop sidebar */}
-      <aside className="hidden lg:flex flex-col w-56 bg-slate-900 border-r border-slate-800 flex-shrink-0 fixed inset-y-0 left-0 z-20">
-        <Sidebar view={view} setView={setView} />
-      </aside>
+      {!isHome && (
+        <aside className="hidden lg:flex flex-col w-56 bg-slate-900 border-r border-slate-800 flex-shrink-0 fixed inset-y-0 left-0 z-20">
+          <Sidebar view={view} setView={setView} />
+        </aside>
+      )}
 
       {/* Mobile overlay */}
-      {mobileOpen && (
+      {mobileOpen && !isHome && (
         <div className="lg:hidden fixed inset-0 z-40 flex">
           <div className="fixed inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
           <div className="relative w-64 bg-slate-900 border-r border-slate-800 flex flex-col z-50">
@@ -127,45 +130,49 @@ export default function App() {
       )}
 
       {/* Main content */}
-      <div className="flex-1 lg:ml-56 flex flex-col min-h-screen">
+      <div className={`flex-1 ${isHome ? '' : 'lg:ml-56'} flex flex-col min-h-screen`}>
         {/* Top bar */}
-        <header className="sticky top-0 z-10 bg-slate-950/90 backdrop-blur-sm border-b border-slate-800/60 px-4 lg:px-8 py-3.5 flex items-center gap-4">
-          <button
-            onClick={() => setMobileOpen(true)}
-            className="lg:hidden text-slate-400 hover:text-slate-300"
-            aria-label="Open menu"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
-          <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-semibold text-white truncate">{currentNav?.label ?? 'Overview'}</h1>
-            <p className="text-xs text-slate-500 hidden sm:block">Kenya Fiscal Intelligence Platform</p>
-          </div>
-          {/* Data trust indicator */}
-          <div className="flex items-center gap-1.5 flex-shrink-0">
-            <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-            <span className="text-xs text-slate-500 font-mono hidden sm:block">Verified data</span>
-          </div>
-        </header>
+        {!isHome && (
+          <header className="sticky top-0 z-10 bg-slate-950/90 backdrop-blur-sm border-b border-slate-800/60 px-4 lg:px-8 py-3.5 flex items-center gap-4">
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="lg:hidden text-slate-400 hover:text-slate-300"
+              aria-label="Open menu"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+            <div className="flex-1 min-w-0">
+              <h1 className="text-sm font-semibold text-white truncate">{currentNav?.label ?? 'Overview'}</h1>
+              <p className="text-xs text-slate-500 hidden sm:block">Kenya Fiscal Intelligence Platform</p>
+            </div>
+            {/* Data trust indicator */}
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+              <span className="text-xs text-slate-500 font-mono hidden sm:block">Verified data</span>
+            </div>
+          </header>
+        )}
 
         {/* Page content */}
-        <main className="flex-1 px-4 lg:px-8 py-6 lg:py-8 max-w-7xl w-full mx-auto">
+        <main className={`flex-1 w-full mx-auto ${isHome ? '' : 'px-4 lg:px-8 py-6 lg:py-8 max-w-7xl'}`}>
           <ErrorBoundary>
             <ViewRouter view={view} onNavigate={setView} />
           </ErrorBoundary>
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-slate-800 px-4 lg:px-8 py-4">
-          <div className="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
-            <p className="text-xs text-slate-600">
-              Sources: National Treasury BPS 2025, Central Bank of Kenya, KRA, IMF Fiscal Monitor
-            </p>
-            <p className="text-xs text-slate-700 font-mono">
-              Anti-hallucination policy active · No fabricated data
-            </p>
-          </div>
-        </footer>
+        {!isHome && (
+          <footer className="border-t border-slate-800 px-4 lg:px-8 py-4">
+            <div className="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
+              <p className="text-xs text-slate-600">
+                Sources: National Treasury BPS 2025, Central Bank of Kenya, KRA, IMF Fiscal Monitor
+              </p>
+              <p className="text-xs text-slate-700 font-mono">
+                Anti-hallucination policy active · No fabricated data
+              </p>
+            </div>
+          </footer>
+        )}
       </div>
     </div>
   );
