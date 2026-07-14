@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Activity, ShieldAlert, Map, Scale, Briefcase, Wallet, ChevronDown } from 'lucide-react';
-import { FISCAL_CORE } from '../data/mockData';
+import { Activity, ShieldAlert, Map, Scale, Briefcase, Wallet, ChevronDown, TrendingUp, Landmark } from 'lucide-react';
+import { FISCAL_CORE, ECONOMIC_HEALTH_SCORE } from '../data/mockData';
 import { formatKSh } from '../components/SharedUI';
 
 export const HomeDashboard = ({ onNavigate }) => {
@@ -21,7 +21,6 @@ export const HomeDashboard = ({ onNavigate }) => {
   }, [interestPerSecond, annualInterest]);
 
   const debtRatio = ((FISCAL_CORE.totalDebt?.val / FISCAL_CORE.gdp) * 100).toFixed(1);
-  const fiscalScore = "ELEVATED RISK";
 
   return (
     <div className="bg-slate-950 min-h-screen text-white font-sans selection:bg-emerald-500/30 w-full overflow-x-hidden">
@@ -31,7 +30,10 @@ export const HomeDashboard = ({ onNavigate }) => {
         
         <div className="z-10 w-full max-w-6xl mx-auto space-y-12">
           <div className="space-y-4">
-            <h1 className="text-xs md:text-sm font-black text-emerald-500 uppercase tracking-[0.5em] animate-in fade-in slide-in-from-bottom-4 duration-700">Kenya Public Debt</h1>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase tracking-widest mb-2 animate-bounce">
+              <TrendingUp size={14} className="text-emerald-400" /> Version 2.0: Comprehensive Fiscal Intelligence Platform
+            </div>
+            <h1 className="text-xs md:text-sm font-black text-emerald-500 uppercase tracking-[0.5em] animate-in fade-in slide-in-from-bottom-4 duration-700">Kenya Public Debt Stock</h1>
             <div className="text-6xl sm:text-8xl md:text-[10rem] font-black tracking-tighter leading-none text-white drop-shadow-2xl animate-in fade-in slide-in-from-bottom-6 duration-1000">
               {formatKSh(FISCAL_CORE.totalDebt?.val, true).replace('KSh ', '')}
             </div>
@@ -48,7 +50,7 @@ export const HomeDashboard = ({ onNavigate }) => {
             </p>
           </div>
 
-          {/* QUICK METRICS */}
+          {/* QUICK METRICS INCLUDING ECONOMIC HEALTH SCORE */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 md:pt-16 border-t border-slate-900 w-full max-w-5xl mx-auto animate-in fade-in duration-1000 delay-500">
             <div>
               <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Debt-to-GDP</p>
@@ -62,9 +64,18 @@ export const HomeDashboard = ({ onNavigate }) => {
               <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Annual Interest</p>
               <p className="text-2xl md:text-4xl font-black text-red-400">{formatKSh(annualInterest)}</p>
             </div>
-            <div>
-              <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Health Score</p>
-              <p className="text-xl md:text-2xl font-black text-red-500 mt-2">{fiscalScore}</p>
+            <div 
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                onNavigate('economy');
+              }}
+              className="cursor-pointer group bg-amber-500/5 p-3 rounded-2xl border border-amber-500/20 hover:border-amber-500/40 transition-all"
+            >
+              <p className="text-[9px] font-black text-amber-400 uppercase tracking-widest mb-1 flex items-center justify-center gap-1">
+                Economic Health <TrendingUp size={12} />
+              </p>
+              <p className="text-xl md:text-2xl font-black text-white font-mono">{ECONOMIC_HEALTH_SCORE.score}/100</p>
+              <span className="text-[9px] font-black uppercase text-amber-400 block tracking-wider">{ECONOMIC_HEALTH_SCORE.classification}</span>
             </div>
           </div>
         </div>
@@ -125,18 +136,20 @@ export const HomeDashboard = ({ onNavigate }) => {
       {/* NAVIGATION / MODULES */}
       <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-slate-900">
          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">Explore The Data</h2>
-            <p className="text-xs font-black text-slate-500 uppercase tracking-[0.3em]">Enter the Fiscal Intelligence Center</p>
+            <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4">Explore The Intelligence Modules</h2>
+            <p className="text-xs font-black text-slate-500 uppercase tracking-[0.3em]">Comprehensive Macro, Fiscal, & Legislative Center</p>
          </div>
 
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { id: 'debt', label: 'Public Debt', desc: 'Creditor networks & repayment schedules', icon: Activity, color: 'text-amber-500' },
-              { id: 'revenue', label: 'Revenue Tracking', desc: 'KRA targets & collection performance', icon: Wallet, color: 'text-emerald-500' },
-              { id: 'counties', label: 'County Allocations', desc: 'Resource tracking across 47 regions', icon: Map, color: 'text-indigo-500' },
-              { id: 'projects', label: 'Mega Projects', desc: 'Final taxpayer cost of infrastructure', icon: Briefcase, color: 'text-cyan-500' },
-              { id: 'bill', label: 'Finance Bill Watch', desc: 'Legislative changes & citizen impact', icon: Scale, color: 'text-slate-300' },
-              { id: 'risk', label: 'Fiscal Risk Monitor', desc: 'Stress testing & default likelihood', icon: ShieldAlert, color: 'text-red-500' },
+              { id: 'economy', label: 'Economic Health', desc: '10 Macro Indicators, 0-100 Score, Watchlist & News', icon: TrendingUp, color: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/5' },
+              { id: 'budget', label: 'FY26/27 Budget & Revenue', desc: 'KSh 4.18T Appropriations, Deficit & KRA Intelligence', icon: Landmark, color: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/5' },
+              { id: 'debt', label: 'Public Debt Stock', desc: 'Creditor networks & maturity schedules', icon: Activity, color: 'text-amber-500 border-slate-800 bg-slate-900/40' },
+              { id: 'counties', label: '47 Counties Audit', desc: 'Equitable share & KSh 516B pending bills', icon: Map, color: 'text-indigo-500 border-slate-800 bg-slate-900/40' },
+              { id: 'projects', label: 'Mega Projects', desc: 'True final taxpayer cost after loan compounding', icon: Briefcase, color: 'text-cyan-500 border-slate-800 bg-slate-900/40' },
+              { id: 'risk', label: 'Fiscal Risk Monitor', desc: 'Stress testing & statutory PFM convergence anchors', icon: ShieldAlert, color: 'text-red-500 border-slate-800 bg-slate-900/40' },
+              { id: 'bill', label: 'Finance Bill Watch', desc: 'Legislative changes & Gen-Z historical aftermath', icon: Scale, color: 'text-slate-300 border-slate-800 bg-slate-900/40' },
+              { id: 'revenue', label: 'Revenue Center', desc: 'Direct KRA tax head breakdown & e-TIMS tracker', icon: Wallet, color: 'text-emerald-500 border-slate-800 bg-slate-900/40' },
             ].map(nav => (
               <button 
                 key={nav.id}
@@ -144,11 +157,11 @@ export const HomeDashboard = ({ onNavigate }) => {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                   onNavigate(nav.id);
                 }}
-                className="group p-8 bg-slate-900/40 border border-slate-800 rounded-3xl text-left hover:bg-slate-800 transition-all hover:scale-[1.02] duration-300"
+                className={`group p-6 rounded-3xl border text-left transition-all hover:scale-[1.02] duration-300 ${nav.color}`}
               >
-                <nav.icon size={32} className={`${nav.color} mb-6`} />
-                <h3 className="text-xl font-black text-white uppercase tracking-tight mb-2 group-hover:text-emerald-400 transition-colors">{nav.label}</h3>
-                <p className="text-xs font-bold text-slate-500 uppercase leading-relaxed">{nav.desc}</p>
+                <nav.icon size={28} className="mb-5" />
+                <h3 className="text-lg font-black text-white uppercase tracking-tight mb-2 group-hover:text-emerald-300 transition-colors">{nav.label}</h3>
+                <p className="text-xs font-bold text-slate-400 uppercase leading-relaxed">{nav.desc}</p>
               </button>
             ))}
          </div>

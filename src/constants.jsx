@@ -15,8 +15,12 @@ export const PROJECT_HEALTH = {
 };
 
 export const SOURCES = {
-  TREASURY: { name: 'National Treasury / BPS 2025', lastUpdated: 'June 2026' },
-  CBK: { name: 'Central Bank of Kenya', lastUpdated: 'May 2026' },
-  KRA: { name: 'Kenya Revenue Authority', lastUpdated: 'May 2026' },
-  IMF: { name: 'IMF Fiscal Monitor', lastUpdated: 'April 2026' },
+  TREASURY: { name: 'National Treasury / Budget Estimates FY26/27', lastUpdated: 'July 2026' },
+  CBK: { name: 'Central Bank of Kenya Statistical Bulletin', lastUpdated: 'July 2026' },
+  KRA: { name: 'Kenya Revenue Authority e-TIMS Registry', lastUpdated: 'July 2026' },
+  KNBS: { name: 'Kenya National Bureau of Statistics (KNBS)', lastUpdated: 'July 2026' },
+  PARLIAMENT: { name: 'Parliament Budget Office / Auditor General', lastUpdated: 'July 2026' },
+  IMF: { name: 'IMF Extended Fund Facility & Fiscal Monitor', lastUpdated: 'July 2026' },
+  WORLD_BANK: { name: 'World Bank Kenya Economic Update', lastUpdated: 'June 2026' },
+  AFDB: { name: 'African Development Bank (AfDB) Portal', lastUpdated: 'June 2026' },
 };

@@ -1,4 +1,4 @@
-import { SectionHeader, DataBadge, Explanation } from '../components/SharedUI';
+import { SectionHeader, DataBadge } from '../components/SharedUI';
 import { RISK_INDICATORS, RISK_METHODOLOGY } from '../data/mockData';
 import { STATUS, SOURCES } from '../constants';
 

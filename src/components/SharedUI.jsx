@@ -1,5 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Component, useState } from 'react';
-import { ShieldAlert, AlertTriangle, X, ShieldQuestion, HelpCircle } from 'lucide-react';
+import { ShieldAlert, X, ShieldQuestion, HelpCircle } from 'lucide-react';
 import { STATUS } from '../constants';
 
 export class ErrorBoundary extends Component {

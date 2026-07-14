@@ -1,36 +1,42 @@
 import { useState } from 'react';
 import {
   LayoutDashboard, Activity, ShieldAlert, Map,
-  Scale, Briefcase, Wallet, ShieldQuestion,
-  Menu, X, TrendingUp
+  Scale, Briefcase, ShieldQuestion,
+  Menu, X, TrendingUp, Landmark, Wallet
 } from 'lucide-react';
 
 import { ErrorBoundary } from './components/SharedUI';
 import { SYNC_INFO } from './data/mockData';
 import { HomeDashboard } from './views/HomeDashboard';
+import { EconomyDashboard } from './views/EconomyDashboard';
+import { BudgetDashboard, RevenueDashboard } from './views/BudgetDashboard';
 import { DebtDashboard } from './views/DebtDashboard';
-import { ProjectsDashboard, RevenueDashboard } from './views/ProjectsDashboard';
+import { ProjectsDashboard } from './views/ProjectsDashboard';
 import { CountyDashboard } from './views/CountyDashboard';
 import { FiscalRiskDashboard } from './views/FiscalRiskDashboard';
 import { FinanceBillDashboard } from './views/FinanceBillDashboard';
 
 // ── NAV CONFIG ───────────────────────────────────────────────
 const NAV = [
-  { id: 'home',     label: 'Overview',      icon: LayoutDashboard, group: 'Main'       },
-  { id: 'debt',     label: 'Public Debt',   icon: Activity,        group: 'Main'       },
-  { id: 'revenue',  label: 'Revenue',       icon: TrendingUp,      group: 'Main'       },
-  { id: 'projects', label: 'Projects',      icon: Briefcase,       group: 'Analysis'   },
-  { id: 'counties', label: 'Counties',      icon: Map,             group: 'Analysis'   },
-  { id: 'risk',     label: 'Fiscal Risk',   icon: ShieldAlert,     group: 'Analysis'   },
-  { id: 'bill',     label: 'Finance Bill',  icon: Scale,           group: 'Legislation'},
+  { id: 'home',     label: 'Overview',        icon: LayoutDashboard, group: 'Intelligence Center' },
+  { id: 'economy',  label: 'Economic Health', icon: TrendingUp,      group: 'Intelligence Center' },
+  { id: 'budget',   label: 'Budget FY26/27',  icon: Landmark,        group: 'Intelligence Center' },
+  { id: 'revenue',  label: 'KRA Revenue',     icon: Wallet,          group: 'Fiscal Audit'        },
+  { id: 'debt',     label: 'Public Debt',     icon: Activity,        group: 'Fiscal Audit'        },
+  { id: 'projects', label: 'Mega Projects',   icon: Briefcase,       group: 'Fiscal Audit'        },
+  { id: 'counties', label: '47 Counties',     icon: Map,             group: 'Devolution & Risk'   },
+  { id: 'risk',     label: 'Fiscal Risk',     icon: ShieldAlert,     group: 'Devolution & Risk'   },
+  { id: 'bill',     label: 'Finance Bill',    icon: Scale,           group: 'Legislation & News'  },
 ];
 
 // ── VIEW ROUTER ──────────────────────────────────────────────
 function ViewRouter({ view, onNavigate }) {
   switch (view) {
     case 'home':     return <HomeDashboard onNavigate={onNavigate} />;
-    case 'debt':     return <DebtDashboard />;
+    case 'economy':  return <EconomyDashboard />;
+    case 'budget':   return <BudgetDashboard />;
     case 'revenue':  return <RevenueDashboard />;
+    case 'debt':     return <DebtDashboard />;
     case 'projects': return <ProjectsDashboard />;
     case 'counties': return <CountyDashboard />;
     case 'risk':     return <FiscalRiskDashboard />;
@@ -165,10 +171,10 @@ export default function App() {
           <footer className="border-t border-slate-800 px-4 lg:px-8 py-4">
             <div className="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
               <p className="text-xs text-slate-600">
-                Sources: National Treasury BPS 2025, Central Bank of Kenya, KRA, IMF Fiscal Monitor
+                Sources: National Treasury FY2026/27 Budget, Central Bank of Kenya, KNBS, KRA, Auditor General & IMF
               </p>
               <p className="text-xs text-slate-700 font-mono">
-                Anti-hallucination policy active · No fabricated data
+                Anti-hallucination policy active · No fabricated data · Verified Official Releases
               </p>
             </div>
           </footer>
