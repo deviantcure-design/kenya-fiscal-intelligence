@@ -312,10 +312,10 @@ export default function KenyaDebtDashboard() {
   const uniqueStatuses = ['All', ...new Set(DEBT_FUNDED_PROJECTS.map(p => p.status))];
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 font-sans flex flex-col md:flex-row antialiased">
+    <div className="h-screen bg-slate-900 text-slate-100 font-sans flex flex-col md:flex-row antialiased overflow-hidden">
       
       {/* SIDEBAR NAVIGATION */}
-      <aside className="w-full md:w-80 bg-slate-950 border-b md:border-b-0 md:border-r border-slate-800 flex flex-col shrink-0">
+      <aside className="w-full md:w-80 bg-slate-950 border-b md:border-b-0 md:border-r border-slate-800 flex flex-col shrink-0 overflow-y-auto z-20 shadow-xl md:shadow-none">
         <div className="p-6 border-b border-slate-800 bg-slate-950/50 flex flex-col">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-red-600/10 border border-red-500/30 rounded-lg text-red-500">
