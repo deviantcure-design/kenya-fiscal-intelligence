@@ -23,50 +23,50 @@ import {
 // 1. HARDCODED FINANCIAL DATA (2026 ENVIRONMENT)
 // ==========================================
 const DEBT_SUMMARY = {
-  totalDebt: 13020000000000, // KSh 13.02 Trillion
-  debtToGdp: 70.4,
+  totalDebt: 13200000000000, // KSh 13.20 Trillion
+  debtToGdp: 68.5,
   debtServiceRatio: 69.0, // 69% of ordinary revenue
   domestic: {
-    total: 7240000000000, // KSh 7.24 Trillion
-    percentage: 55.6,
-    interest: 851000000000, // KSh 851 Billion
+    total: 7726000000000, // KSh 7.726 Trillion
+    percentage: 58.5,
+    interest: 881000000000, // KSh 881 Billion
     holders: [
-      { name: 'Commercial Banks', amount: 3410000000000, pct: 47.1 },
-      { name: 'Pension Funds', amount: 2310000000000, pct: 31.9 },
-      { name: 'Insurance Companies', amount: 580000000000, pct: 8.0 },
-      { name: 'Central Bank of Kenya', amount: 430000000000, pct: 5.9 },
-      { name: 'Other Investors', amount: 510000000000, pct: 7.1 }
+      { name: 'Commercial Banks', amount: 3640000000000, pct: 47.1 },
+      { name: 'Pension Funds', amount: 2465000000000, pct: 31.9 },
+      { name: 'Insurance Companies', amount: 618000000000, pct: 8.0 },
+      { name: 'Central Bank of Kenya', amount: 456000000000, pct: 5.9 },
+      { name: 'Other Investors', amount: 547000000000, pct: 7.1 }
     ]
   },
   external: {
-    total: 5780000000000, // KSh 5.78 Trillion
-    percentage: 44.4,
+    total: 5474000000000, // KSh 5.474 Trillion
+    percentage: 41.5,
     interest: 246000000000, // KSh 246 Billion
     holders: [
-      { name: 'Multilateral (World Bank, IMF, AfDB)', amount: 2950000000000, pct: 51.0 },
-      { name: 'Bilateral Lenders (China, Japan, France)', amount: 1510000000000, pct: 26.1 },
-      { name: 'Commercial Banks & Eurobonds', amount: 1320000000000, pct: 22.9 }
+      { name: 'Multilateral (World Bank, IMF, AfDB)', amount: 2791000000000, pct: 51.0 },
+      { name: 'Bilateral Lenders (China, Japan, France)', amount: 1428000000000, pct: 26.1 },
+      { name: 'Commercial Banks & Eurobonds', amount: 1255000000000, pct: 22.9 }
     ]
   },
-  annualInterestTotal: 1097000000000 // KSh 1.097 Trillion
+  annualInterestTotal: 1127000000000 // KSh 1.127 Trillion
 };
 
 const UPCOMING_REPAYMENTS = [
   {
     id: 'rep-1',
-    title: 'Treasury Bond (FXD1/2016/10Yr) Maturity',
-    type: 'Domestic Debt',
-    amount: 45000000000,
-    dueDate: '2026-06-25',
+    title: 'Proposed Debt Swap (Citigroup Arrangement)',
+    type: 'External Debt',
+    amount: 129700000000,
+    dueDate: '2026-10-15',
     urgency: 'high',
-    lender: 'Local Institutional Investors'
+    lender: 'Various External Creditors'
   },
   {
     id: 'rep-2',
     title: 'Eurobond Semi-Annual Interest Payment',
     type: 'External Debt',
     amount: 14200000000,
-    dueDate: '2026-07-12',
+    dueDate: '2026-10-28',
     urgency: 'high',
     lender: 'International Sovereign Bond Holders'
   },
@@ -75,7 +75,7 @@ const UPCOMING_REPAYMENTS = [
     title: 'IMF Extended Fund Facility (EFF) Tranche Repayment',
     type: 'External Debt',
     amount: 28700000000,
-    dueDate: '2026-08-04',
+    dueDate: '2026-11-04',
     urgency: 'medium',
     lender: 'International Monetary Fund'
   },
@@ -84,7 +84,7 @@ const UPCOMING_REPAYMENTS = [
     title: 'Treasury Bill (91-Day & 182-Day) Synchronized Batch',
     type: 'Domestic Debt',
     amount: 62000000000,
-    dueDate: '2026-08-20',
+    dueDate: '2026-11-20',
     urgency: 'medium',
     lender: 'Commercial Banks & CBK Open Market'
   },
@@ -93,7 +93,7 @@ const UPCOMING_REPAYMENTS = [
     title: 'Exim Bank of China (SGR Loan Phase 1 Tranche)',
     type: 'External Debt',
     amount: 38500000000,
-    dueDate: '2026-11-15',
+    dueDate: '2026-12-15',
     urgency: 'low',
     lender: 'Government of China (Bilateral)'
   }
